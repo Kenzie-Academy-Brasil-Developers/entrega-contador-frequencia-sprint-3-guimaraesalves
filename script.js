@@ -12,15 +12,35 @@ typedText = document.getElementById("textInput").value;
 
     
 typedText = typedText.toLowerCase();
-typedText = typedText.split(' ').join('');
-
 typedText = typedText.replace(/[^a-z'\s]+/g, ''); 
 
 
 
+
+words = typedText.split(/\s/);  
+for (let j = 0; j < words.length; j++) {
+     currentWords = words[j] 
+   
+   if (words[currentWords] === undefined) {
+      words[currentWords] = 1; 
+    } else { 
+      words[currentWords]++; 
+    }
+    
+   
+}
+for (let palavra in words) { 
+   const span = document.createElement("span"); 
+   const palavraContent = `"${palavra}": ${words[palavra]}, `;
+   span.innerText = palavraContent; 
+   const palav = document.getElementById("wordsDiv");
+   palav.appendChild(span); 
+}
+
+
+
 const letterCounts = {};
-
-
+typedText = typedText.split(' ').join('');
 for (let i = 0; i < typedText.length; i++) {
     currentLetter = typedText[i];    
       
@@ -30,7 +50,7 @@ for (let i = 0; i < typedText.length; i++) {
      } else { 
         letterCounts[currentLetter]++; 
      }
-     //letterCounts[typedText[i]] = 0; 
+     
     
 }
 
@@ -41,6 +61,8 @@ for (let letter in letterCounts) {
     const letters = document.getElementById("lettersDiv");
     letters.appendChild(span); 
  }
+
+
 
  console.log(typedText)
  console.log(letterCounts)
